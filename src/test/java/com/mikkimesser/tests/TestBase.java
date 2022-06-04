@@ -1,8 +1,10 @@
 package com.mikkimesser.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.mikkimesser.configuration.CredentialConfig;
 import com.mikkimesser.helpers.Attach;
 import io.qameta.allure.Step;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -19,10 +21,18 @@ public class TestBase {
     @BeforeAll
     @Step("Предварительная настройка")
     public static void setUp() {
+        CredentialConfig credentialConfig = ConfigFactory.create(CredentialConfig.class);
+        String selenoidLogin = credentialConfig.login();
+        String selenoidPassword = credentialConfig.password();
+
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1280x720";
-        String selenoidURL = String.format("https://user1:1234@%s/wd/hub",System.getProperty("selenoidURL"));
-        Configuration.remote = selenoidURL;
+        String selenoidURL = System.getProperty("selenoidURL");
+        String selenoidConnectionString = String.format("https://%s:%s@%s/wd/hub",
+                selenoidLogin,
+                selenoidPassword,
+                selenoidURL);
+        Configuration.remote = selenoidConnectionString;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
