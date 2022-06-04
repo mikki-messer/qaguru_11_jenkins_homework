@@ -25,6 +25,7 @@ public class TestBase {
         String selenoidPassword = credentialConfig.password();
 
         String selenoidURL = System.getProperty("selenoidURL");
+        System.out.println(selenoidURL);
         String selenoidConnectionString = String.format("https://%s:%s@%s/wd/hub",
                 selenoidLogin,
                 selenoidPassword,
