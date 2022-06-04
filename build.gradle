@@ -54,3 +54,9 @@ task demoqa(type: Test){
         includeTags "demoqa_registration_form"
     }
 }
+
+task tst(type: Test){
+    useJUnitPlatform{
+        includeTags "tst"
+    }
+}
