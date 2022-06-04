@@ -7,7 +7,6 @@ import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.time.ZoneId;
@@ -25,14 +24,15 @@ public class TestBase {
         String selenoidLogin = credentialConfig.login();
         String selenoidPassword = credentialConfig.password();
 
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1280x720";
         String selenoidURL = System.getProperty("selenoidURL");
         String selenoidConnectionString = String.format("https://%s:%s@%s/wd/hub",
                 selenoidLogin,
                 selenoidPassword,
                 selenoidURL);
+
         Configuration.remote = selenoidConnectionString;
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1280x720";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);

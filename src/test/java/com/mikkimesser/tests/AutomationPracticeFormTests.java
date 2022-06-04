@@ -19,14 +19,6 @@ public class AutomationPracticeFormTests extends TestBase {
 
     Faker faker = new Faker();
 
-    /*
-    План
-    1. Разобраться с систем пропертис +
-    2. Добавить передачу адреса селеноида через систем пропертис
-    3. разобраться с библиотекой оунер
-    4. добавить .properties файл и обвязку
-     */
-
     @Test
     @DisplayName("Тест формы регистрации на demoqa")
     void fillFormTest() throws ParseException {
